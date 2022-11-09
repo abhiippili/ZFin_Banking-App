@@ -1,0 +1,32 @@
+[
+  {
+    "name": "abhishek",
+    "balance": 50000
+  },
+  {
+    "name": "sourab",
+    "balance": 10000
+  },
+  {
+    "name": "nikhil",
+    "balance": 30000
+  },
+  {
+    "name": "kunal",
+    "balance": 100000
+  },
+  {
+    "name": "dheeraj"
+  },
+  {
+    "name": "virat"
+  },
+  {
+    "name": "gideon",
+    "balance": 9000
+  },
+  {
+    "name": "sumanth",
+    "balance": 35000
+  }
+]
