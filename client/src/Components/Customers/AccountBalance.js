@@ -7,9 +7,11 @@ import { getCustomer } from "./../../api/customersApi";
 const TopButton = styled(Button)({
   color: "#fff",
   margin: "20px 20px",
-  backgroundColor: "#4158D0",
-  backgroundImage:
-    "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)"
+  // backgroundColor: "#4158D0",
+  // backgroundImage:
+  //   "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)"
+  backgroundColor: "#0093E9",
+  backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
 });
 
 const modalStyle = {

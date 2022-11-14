@@ -15,7 +15,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 const LinkNav = styled(NavLink)({
   padding: "20px 20px",
   textDecoration: "none",
-  color: "inherit"
+  color: "inherit",
+  fontWeight: 500
 });
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -29,9 +30,9 @@ const Logo = styled(Typography)({
 });
 
 const activeStyle = {
-  borderBottom: "2px solid #ffd700",
+  borderBottom: "2px solid gold",
   borderRadius: "2px",
-  color: "#ffd700"
+  color: "gold"
 };
 function Navbar() {
   const [notifications, setNotifications] = useState(2);

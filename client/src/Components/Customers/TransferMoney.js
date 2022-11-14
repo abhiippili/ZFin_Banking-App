@@ -17,16 +17,18 @@ import {
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { styled } from "@mui/system";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getAllCustomers, getCustomer } from "../../api/customersApi";
 import { makeTransaction } from "../../api/transactionsApi";
 
 const TopButton = styled(Button)({
   color: "#fff",
   margin: "20px 20px",
-  backgroundColor: "#4158D0",
-  backgroundImage:
-    "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)"
+  // backgroundColor: "#4158D0",
+  // backgroundImage:
+  //   "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)"
+  backgroundColor: "#0093E9",
+  backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
 });
 
 const modalStyle = {
@@ -43,7 +45,20 @@ const modalStyle = {
   p: 4
 };
 
-const Popper = ({ message, anchorEl, openModal, setOpenModal }) => {
+const Popper = ({
+  message,
+  anchorEl,
+  openModal,
+  setOpenModal,
+  setAmount,
+  setCustomerName
+}) => {
+  const handleClose = () => {
+    setOpenModal(false);
+    setCustomerName(null);
+    return setAmount(0);
+  };
+
   return (
     <Popover
       open={openModal}
@@ -82,10 +97,8 @@ const TransferMoney = () => {
   const [amount, setAmount] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [makeQuery, setMakeQuery] = useState(false);
   const [customerName, setCustomerName] = useState(null);
-
-  console.log(amount);
+  const [message, setMessage] = useState("");
 
   const { data, isLoading } = useQuery(
     ["queryAllCustomers", openTransfer],
@@ -97,6 +110,15 @@ const TransferMoney = () => {
     () => getCustomer(996419)
   );
 
+  const mutation = useMutation((paramObj) => makeTransaction(paramObj), {
+    onSuccess(data) {
+      setMessage("✅ Success");
+    },
+    onError(err) {
+      setMessage("❌ Error transacting your money");
+    }
+  });
+
   const handleClick = async (e) => {
     const toCustomerObj = data.data.customers.find(
       (o) => o.name == customerName
@@ -106,10 +128,11 @@ const TransferMoney = () => {
       toCustomer: toCustomerObj.accountNumber,
       amount: amount
     };
-
-    setMakeQuery(toCustomerObj.accountNumber);
+    balanceData.data.customers[0].balance < amount
+      ? setMessage("❌ Insufficient Balance")
+      : mutation.mutate(bodyObj);
     setAnchorEl(e.currentTarget);
-    return makeQuery && setOpenModal(true);
+    return setOpenModal(true);
   };
 
   return (
@@ -154,10 +177,12 @@ const TransferMoney = () => {
               Make Transacation
             </Button>
             <Popper
-              message={"❌ Insufficient Balance"}
+              message={message}
               anchorEl={anchorEl}
               openModal={openModal}
               setOpenModal={setOpenModal}
+              setCustomerName={setCustomerName}
+              setAmount={setAmount}
             />
           </Box>
         </Modal>

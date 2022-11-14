@@ -18,7 +18,7 @@ function Customers() {
         sx={{
           width: "95%",
           height: "90%",
-          border: "1.5px solid gold"
+          border: "1.5px solid none"
         }}
       >
         <Box
