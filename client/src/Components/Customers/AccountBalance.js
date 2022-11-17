@@ -18,8 +18,8 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  backgroundColor: "#0093E9",
-  backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)",
+  backgroundColor: "#21D4FD",
+  backgroundImage: "linear-gradient(12deg, #21D4FD 0%, #B721FF 100%)",
   borderRadius: "10px",
   boxShadow: 24,
   p: 4

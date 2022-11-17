@@ -55,10 +55,11 @@ function Home() {
 
 const customersButtonStyle = {
   margin: "20px",
-  color: "white",
+  color: "black",
+  fontWeight: 600,
   background: "rgb(234,192,0)",
-  background:
-    "linear-gradient(156deg, rgba(234,192,0,1) 0%, rgba(34,39,51,1) 100%)",
+  backgroundColor: "#21D4FD",
+  backgroundImage: "linear-gradient(10deg, #21D4FD 0%, #B721FF 100%)",
   "&:hover": {
     transform: "scale(1.01)"
   }
