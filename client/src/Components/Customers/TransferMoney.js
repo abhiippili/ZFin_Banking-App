@@ -107,7 +107,7 @@ const TransferMoney = ({ refetchCustomers }) => {
     }
   });
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     const toCustomerObj = data.data.customers.find(
       (o) => o.name == customerName
     );

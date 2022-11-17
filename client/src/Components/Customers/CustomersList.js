@@ -10,8 +10,9 @@ import {
   Typography
 } from "@mui/material";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getCustomer } from "../../api/customersApi";
+import { makeTransaction } from "../../api/transactionsApi";
 
 const StyledContainer = styled(Box)({
   marginBottom: "10px",
@@ -63,6 +64,17 @@ const CustomersList = ({ customersData }) => {
       enabled: queryState
     }
   );
+
+  const mutation = useMutation((bodyObj) => makeTransaction(bodyObj));
+
+  const handleSubmit = (e) => {
+    const bodyObj = {
+      fromCustomer: 996419,
+      toCustomer: customer,
+      amount: Number(amount)
+    };
+    mutation.mutate(bodyObj);
+  };
 
   return (
     <Box sx={{ margin: "0rem 2rem" }}>
@@ -135,6 +147,7 @@ const CustomersList = ({ customersData }) => {
                   </FormControl>
                   <Button
                     variant="outlined"
+                    onClick={handleSubmit}
                     sx={{
                       marginTop: "20px",
                       marginLeft: "25%",
