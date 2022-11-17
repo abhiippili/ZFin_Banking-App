@@ -17,12 +17,8 @@ const StyledContainer = styled(Box)({
   marginBottom: "10px",
   minHeight: "3rem",
   display: "flex",
-  // justifyContent: "space-around",
   alignItems: "center",
   borderRadius: "10px",
-  // backgroundColor: "#4158D0",
-  // backgroundImage:
-  //   "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
   backgroundColor: "#0093E9",
   backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)",
   cursor: "pointer"

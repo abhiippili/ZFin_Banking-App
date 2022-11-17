@@ -7,7 +7,11 @@ import CustomersList from "../Components/Customers/CustomersList";
 import TransferMoney from "../Components/Customers/TransferMoney";
 
 function Customers() {
-  const { data, isLoading } = useQuery("queryCustomers", getAllCustomers);
+  const {
+    data,
+    isLoading,
+    refetch: refetchCustomers
+  } = useQuery("queryCustomers", getAllCustomers);
 
   return (
     <Box
@@ -27,7 +31,7 @@ function Customers() {
             justifyContent: "space-between"
           }}
         >
-          <TransferMoney />
+          <TransferMoney refetchCustomers={refetchCustomers} />
           <AccountBalance />
         </Box>
         <Typography variant="h8" sx={{ marginLeft: "20px" }}>

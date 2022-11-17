@@ -30,9 +30,9 @@ const Logo = styled(Typography)({
 });
 
 const activeStyle = {
-  borderBottom: "2px solid gold",
+  borderBottom: "2px solid #61dafb",
   borderRadius: "2px",
-  color: "gold"
+  color: "#61dafb"
 };
 function Navbar() {
   const [notifications, setNotifications] = useState(2);
@@ -117,7 +117,12 @@ function Navbar() {
               >
                 <Typography
                   component="div"
-                  sx={{ backgroundColor: "gold", padding: "10px" }}
+                  sx={{
+                    backgroundImage:
+                      "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)",
+                    padding: "10px",
+                    color: "white"
+                  }}
                 >
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Nihil doloremque magnam tempore doloribus at voluptates labore
