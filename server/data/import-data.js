@@ -6,9 +6,9 @@ const Customer = require("./../Models/customersModel");
 const Transaction = require("./../Models/transactionsModel");
 
 const dbString = process.env.DB_STRING.replace(
-  "<PASSWORD>",
-  process.env.DB_PASS
-);
+  "<USERNAME>",
+  process.env.DB_USERNAME
+).replace("<PASSWORD>", process.env.DB_PASS);
 
 mongoose.connect(dbString).then((con) => {
   console.log("Connected to the database");
