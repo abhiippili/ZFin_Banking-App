@@ -13,8 +13,8 @@ const transactionSchema = new mongoose.Schema({
     type: Number
   },
   timeOfTransaction: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    default: Date,
     format: "YYYY-MM-DD"
   }
 });

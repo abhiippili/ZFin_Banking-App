@@ -19,7 +19,7 @@ const customersData = JSON.parse(
   fs.readFileSync(`${__dirname}/customersData.json`)
 );
 
-const importData = async () => {
+const importCustomers = async () => {
   try {
     await Customer.create(customersData);
   } catch (err) {
@@ -28,7 +28,7 @@ const importData = async () => {
   process.exit();
 };
 
-const deleteData = async () => {
+const deleteCustomers = async () => {
   try {
     await Customer.deleteMany();
   } catch (err) {
@@ -37,8 +37,22 @@ const deleteData = async () => {
   process.exit();
 };
 
-if (process.argv[2] === "--import") {
-  importData();
-} else if (process.argv[2] === "--delete") {
-  deleteData();
+const deleteTransactions = async () => {
+  try {
+    await Transaction.deleteMany();
+  } catch (err) {
+    console.log(err);
+  }
+  process.exit();
+};
+
+if (process.argv[2] === "--importCustomers") {
+  importCustomers();
+} else if (process.argv[2] === "--deleteCustomers") {
+  deleteCustomers();
+} else if (process.argv[2] === "--deleteTransactions") {
+  deleteTransactions();
 }
+
+// Generate random acc num
+// console.log(Math.floor(Math.random() * (1000000-100000) + 100000))
