@@ -27,8 +27,9 @@ const modalStyle = {
 
 const AccountBalance = () => {
   const [openBalance, setOpenBalance] = useState(false);
-  const { data, isLoading } = useQuery(["queryOwner", openBalance], () =>
-    getCustomer(996419)
+  const { data: balance, isLoading: loadingBalance } = useQuery(
+    ["queryOwner", openBalance],
+    () => getCustomer(996419)
   );
 
   return (
@@ -44,7 +45,7 @@ const AccountBalance = () => {
         <Box sx={modalStyle}>
           <Typography variant="h6">
             Remaining Balance :{" "}
-            {isLoading ? "Loading..." : data.data.customers[0].balance}
+            {loadingBalance ? "Loading..." : balance.data.customers[0].balance}
           </Typography>
         </Box>
       </Modal>

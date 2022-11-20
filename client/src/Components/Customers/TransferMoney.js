@@ -20,12 +20,11 @@ import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { getAllCustomers, getCustomer } from "../../api/customersApi";
 import { makeTransaction } from "../../api/transactionsApi";
+import MessagePopper from "./MessagePopper";
 
 const TopButton = styled(Button)({
   color: "#fff",
   margin: "20px 20px",
-  // backgroundColor: "#0093E9",
-  // backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
   backgroundImage: "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)"
 });
 
@@ -42,43 +41,6 @@ const modalStyle = {
   p: 4
 };
 
-const Popper = ({ message, anchorEl, openModal, setOpenModal }) => {
-  return (
-    <Popover
-      open={openModal}
-      anchorEl={anchorEl}
-      onClose={() => setOpenModal(false)}
-      anchorReference="anchorPosition"
-      anchorPosition={{ top: 180, left: 780 }}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "center"
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center"
-      }}
-    >
-      <Box
-        sx={{
-          width: "20vw",
-          height: "2.5rem",
-          boxShadow: 24,
-          backgroundImage:
-            "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)",
-          display: "flex",
-          color: "white",
-          fontWeight: "bolder",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Typography>{message}</Typography>
-      </Box>
-    </Popover>
-  );
-};
-
 const TransferMoney = ({ refetchCustomers }) => {
   const [openTransfer, setOpenTransfer] = useState(false);
   const [amount, setAmount] = useState(0);
@@ -87,8 +49,8 @@ const TransferMoney = ({ refetchCustomers }) => {
   const [customerName, setCustomerName] = useState(null);
   const [message, setMessage] = useState("");
 
-  const { data, isLoading } = useQuery(
-    ["queryAllCustomers", openTransfer],
+  const { data: customers, isLoading: loadingCustomers } = useQuery(
+    ["queryCustomers", openTransfer],
     getAllCustomers
   );
 
@@ -99,7 +61,7 @@ const TransferMoney = ({ refetchCustomers }) => {
 
   const mutation = useMutation((paramObj) => makeTransaction(paramObj), {
     onSuccess(data) {
-      setMessage("✅ Success");
+      setMessage("✅ Transaction Successfull");
       refetchCustomers();
     },
     onError(err) {
@@ -108,7 +70,7 @@ const TransferMoney = ({ refetchCustomers }) => {
   });
 
   const handleClick = (e) => {
-    const toCustomerObj = data.data.customers.find(
+    const toCustomerObj = customers.data.customers.find(
       (o) => o.name == customerName
     );
     const bodyObj = {
@@ -140,11 +102,13 @@ const TransferMoney = ({ refetchCustomers }) => {
       >
         Transfer Money
       </TopButton>
-      {isLoading ? undefined : (
+      {loadingCustomers ? undefined : (
         <Modal open={openTransfer} onClose={handleClose}>
           <Box sx={modalStyle}>
             <Autocomplete
-              options={data.data.customers.map((customer) => customer.name)}
+              options={customers.data.customers.map(
+                (customer) => customer.name
+              )}
               sx={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField {...params} label="Select Customer" />
@@ -170,13 +134,11 @@ const TransferMoney = ({ refetchCustomers }) => {
             >
               Make Transacation
             </Button>
-            <Popper
+            <MessagePopper
               message={message}
               anchorEl={anchorEl}
               openModal={openModal}
               setOpenModal={setOpenModal}
-              setCustomerName={setCustomerName}
-              setAmount={setAmount}
             />
           </Box>
         </Modal>

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { getCustomer } from "../../api/customersApi";
 import { makeTransaction } from "../../api/transactionsApi";
+import MessagePopper from "./MessagePopper";
 
 const StyledContainer = styled(Box)({
   marginBottom: "10px",
@@ -51,21 +52,41 @@ const ModalText = styled(Box)({
   marginBottom: "10px"
 });
 
-const CustomersList = ({ customersData }) => {
+const CustomersList = ({ customersData, refetchCustomers }) => {
   const [openModal, setOpenModal] = useState(false);
   const [customer, setCustomer] = useState(null);
   const queryState = Boolean(customer);
   const [amount, setAmount] = useState("");
+  const [message, setMessage] = useState("");
+  const [openPopper, setOpenPopper] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const { data, isLoading } = useQuery(
-    ["queryCustomer", customer],
-    () => getCustomer(customer),
-    {
-      enabled: queryState
-    }
+  const {
+    data: queriedCustomer,
+    isLoading: loadingCustomer,
+    refetch: refetchCustomer
+  } = useQuery(["queryCustomer", customer], () => getCustomer(customer), {
+    enabled: queryState
+  });
+
+  const { data: balance, isLoading: loadingBalance } = useQuery(
+    ["queryBalance", openModal],
+    () => getCustomer(996419)
   );
 
-  const mutation = useMutation((bodyObj) => makeTransaction(bodyObj));
+  const mutation = useMutation((bodyObj) => makeTransaction(bodyObj), {
+    onSuccess() {
+      setMessage("✅ Transaction Successfull");
+      refetchCustomer();
+      refetchCustomers();
+    },
+    onError(err) {
+      setMessage("❌ Error transacting your money");
+    },
+    onSettled() {
+      setAmount(0);
+    }
+  });
 
   const handleSubmit = (e) => {
     const bodyObj = {
@@ -73,7 +94,11 @@ const CustomersList = ({ customersData }) => {
       toCustomer: customer,
       amount: Number(amount)
     };
-    mutation.mutate(bodyObj);
+    balance.data.customers[0].balance < Number(amount)
+      ? setMessage("❌ Insufficient Balance")
+      : mutation.mutate(bodyObj);
+    setAnchorEl(e.currentTarget);
+    return setOpenPopper(true);
   };
 
   return (
@@ -110,7 +135,7 @@ const CustomersList = ({ customersData }) => {
               </DetailsBox>
             </StyledContainer>
             <Modal open={openModal} onClose={() => setOpenModal(false)}>
-              {isLoading ? (
+              {loadingCustomer ? (
                 <Box sx={modalStyle}>Loading...</Box>
               ) : (
                 <Box sx={modalStyle}>
@@ -119,20 +144,24 @@ const CustomersList = ({ customersData }) => {
                       <pre>Account Number : </pre>
                     </h4>
                     {queryState
-                      ? data.data.customers[0].accountNumber
+                      ? queriedCustomer.data.customers[0].accountNumber
                       : undefined}
                   </ModalText>
                   <ModalText sx={{ display: "flex", alignItems: "center" }}>
                     <h4>
                       <pre>Account Holder : </pre>
                     </h4>
-                    {queryState ? data.data.customers[0].name : undefined}
+                    {queryState
+                      ? queriedCustomer.data.customers[0].name
+                      : undefined}
                   </ModalText>
                   <ModalText sx={{ display: "flex", alignItems: "center" }}>
                     <h4>
                       <pre>Balance : </pre>
                     </h4>
-                    {queryState ? data.data.customers[0].balance : undefined}
+                    {queryState
+                      ? queriedCustomer.data.customers[0].balance
+                      : undefined}
                   </ModalText>
                   <FormControl sx={{ marginTop: "20px", width: "100%" }}>
                     <InputLabel>Amount</InputLabel>
@@ -157,6 +186,12 @@ const CustomersList = ({ customersData }) => {
                   >
                     Send Money
                   </Button>
+                  <MessagePopper
+                    message={message}
+                    anchorEl={anchorEl}
+                    openModal={openPopper}
+                    setOpenModal={setOpenPopper}
+                  />
                 </Box>
               )}
             </Modal>

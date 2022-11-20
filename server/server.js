@@ -7,9 +7,9 @@ const app = require("./app");
 const port = process.env.PORT || 5000;
 
 const conString = process.env.DB_STRING.replace(
-  "<PASSWORD>",
-  process.env.DB_PASS
-);
+  "<USERNAME>",
+  process.env.DB_USERNAME
+).replace("<PASSWORD>", process.env.DB_PASS);
 
 mongoose
   .connect(conString, {

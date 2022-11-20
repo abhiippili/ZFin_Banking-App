@@ -1,27 +1,32 @@
-import { Box, Typography, Popover } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 function About() {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget);
-    return (
-      <Popover
-        open={true}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left"
-        }}
-      >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-      </Popover>
-    );
-  };
   return (
     <Box className="mainComponent">
-      <button onClick={handleClick}>Toggle</button>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%"
+        }}
+      >
+        <Stack direction="column">
+          <Box sx={{ textAlign: "center", marginBottom: "2rem" }}>
+            <img src="logo.png" alt="" width={300} />
+          </Box>
+          <Typography variant="h5">
+            This project is developed for TSF GRIP Program
+          </Typography>
+
+          <Typography
+            sx={{ marginTop: "1rem", color: "#61dafb", marginLeft: "10rem" }}
+          >
+            Developed by Abhishek Ippili
+          </Typography>
+        </Stack>
+      </Container>
     </Box>
   );
 }
