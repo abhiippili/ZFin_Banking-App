@@ -21,8 +21,8 @@ const StyledContainer = styled(Box)({
   display: "flex",
   alignItems: "center",
   borderRadius: "10px",
-  backgroundColor: "#21D4FD",
-  backgroundImage: "linear-gradient(12deg, #21D4FD 0%, #B721FF 100%)",
+  backgroundColor: "rgb(97, 218, 251)",
+  color: "#000",
   cursor: "pointer"
 });
 
@@ -38,8 +38,7 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  backgroundColor: "#21D4FD",
-  backgroundImage: "linear-gradient(12deg, #21D4FD 0%, #B721FF 100%)",
+  backgroundColor: "#fff",
   borderRadius: "10px",
   boxShadow: 24,
   p: 4,
@@ -103,7 +102,7 @@ const CustomersList = ({ customersData, refetchCustomers }) => {
 
   return (
     <Box sx={{ margin: "0rem 2rem" }}>
-      <StyledContainer sx={{ background: "none" }}>
+      <StyledContainer sx={{ background: "none", color: "#fff" }}>
         <DetailsBox>
           <Typography>Account Number</Typography>
         </DetailsBox>

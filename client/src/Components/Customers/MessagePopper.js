@@ -22,10 +22,9 @@ const MessagePopper = ({ message, anchorEl, openModal, setOpenModal }) => {
           width: "20vw",
           height: "2.5rem",
           boxShadow: 24,
-          backgroundImage:
-            "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)",
+          backgroundColor: "rgb(97, 218, 251)",
           display: "flex",
-          color: "white",
+          color: "#000",
           fontWeight: "bolder",
           justifyContent: "center",
           alignItems: "center"

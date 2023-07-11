@@ -23,9 +23,13 @@ import { makeTransaction } from "../../api/transactionsApi";
 import MessagePopper from "./MessagePopper";
 
 const TopButton = styled(Button)({
-  color: "#fff",
+  color: "#000",
+  fontWeight: 600,
   margin: "20px 20px",
-  backgroundImage: "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)"
+  backgroundColor: "rgb(97, 218, 251)",
+  "&:hover": {
+    backgroundColor: "rgb(97, 218, 251)"
+  }
 });
 
 const modalStyle = {
@@ -34,8 +38,7 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  backgroundColor: "#21D4FD",
-  backgroundImage: "linear-gradient(12deg, #21D4FD 0%, #B721FF 100%)",
+  backgroundColor: "#fff",
   borderRadius: "10px",
   boxShadow: 24,
   p: 4
@@ -129,7 +132,11 @@ const TransferMoney = ({ refetchCustomers }) => {
             </FormControl>
             <Button
               variant="outlined"
-              sx={{ marginTop: "20px", marginLeft: "25%", color: "#000" }}
+              sx={{
+                marginTop: "20px",
+                marginLeft: "25%",
+                color: "#000"
+              }}
               onClick={handleClick}
             >
               Make Transacation

@@ -14,7 +14,7 @@ const HomeBox = styled(Box)({
   display: "flex"
 });
 const Banner = styled(Box)({
-  height: "55%",
+  height: "40%",
   boxShadow: "inset -4px -2px 10px rgba(255,223,0,0.5)"
 });
 
@@ -23,7 +23,8 @@ const StyledContainer = styled(Container)({
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "8px",
-  backgroundImage: "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)",
+  backgroundColor: "rgb(97, 218, 251)",
+  color: "#000",
   borderRadius: "10px",
   minHeight: "3rem"
 });
@@ -47,11 +48,11 @@ function Home() {
             height: "100%",
             background: "rgb(0,96,116)",
             background:
-              "linear-gradient(90deg, rgba(0,96,116,1) 0%, rgba(39,43,52,1) 100%)"
+              "radial-gradient(rgba(0,96,116,1) 0%, rgba(39,43,52,1) 100%)"
           }}
         >
           <Typography
-            variant="h2"
+            variant="h3"
             sx={{
               fontWeight: "400",
               color: "white",
@@ -60,7 +61,7 @@ function Home() {
           >
             ZFin
           </Typography>
-          <Typography variant="h5" sx={{ color: "white" }}>
+          <Typography variant="h6" sx={{ color: "white" }}>
             The Ezy Fin Application
           </Typography>
           <Button
@@ -72,7 +73,7 @@ function Home() {
           </Button>
         </Stack>
       </Banner>
-      <Box>
+      <Box sx={{ width: "1000px", margin: "auto", marginTop: "2rem" }}>
         <Typography
           sx={{
             color: "white",
@@ -84,7 +85,7 @@ function Home() {
         >
           Recent Transactions
         </Typography>
-        <StyledContainer sx={{ background: "none" }}>
+        <StyledContainer sx={{ background: "none", color: "#fff" }}>
           <Typography>From Customer</Typography>
           <Typography>To Customer</Typography>
           <Typography sx={{ marginRight: "1rem" }}>
@@ -122,11 +123,9 @@ const customersButtonStyle = {
   margin: "20px",
   color: "black",
   fontWeight: 600,
-  background: "rgb(234,192,0)",
-  backgroundColor: "#21D4FD",
-  backgroundImage: "linear-gradient(10deg, #21D4FD 0%, #B721FF 100%)",
+  backgroundColor: "rgb(97, 218, 251)",
   "&:hover": {
-    transform: "scale(1.01)"
+    backgroundColor: "rgb(97, 218, 251)"
   }
 };
 export default Home;

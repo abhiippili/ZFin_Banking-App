@@ -51,6 +51,7 @@ exports.makeTransaction = async (req, res) => {
 
 exports.getAllTransactions = async (req, res) => {
   try {
+    console.log(req.query);
     const features = new APIFeatures(Transaction.find(), req.query)
       .filter()
       .sort();

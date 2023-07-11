@@ -21,7 +21,8 @@ const LinkNav = styled(NavLink)({
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center"
+  alignItems: "center",
+  fontSize: "1rem"
 });
 
 const Logo = styled(Typography)({
@@ -49,7 +50,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ minHeight: "64px" }}>
+    <AppBar position="sticky">
       <StyledToolbar>
         <Box
           sx={{

@@ -20,7 +20,8 @@ function Customers() {
     >
       <Box
         sx={{
-          width: "95%",
+          width: "1000px",
+          margin: "auto",
           height: "90%",
           border: "1.5px solid none"
         }}
@@ -34,21 +35,23 @@ function Customers() {
           <TransferMoney refetchCustomers={refetchCustomers} />
           <AccountBalance />
         </Box>
-        <Typography variant="h8" sx={{ marginLeft: "20px" }}>
-          <Box
-            className="scrollList"
-            sx={{ maxHeight: "520px", overflowY: "scroll" }}
-          >
-            {loadingCustomers ? (
-              <h4>Loading...</h4>
-            ) : (
-              <CustomersList
-                customersData={customers.data}
-                refetchCustomers={refetchCustomers}
-              />
-            )}
-          </Box>
-        </Typography>
+        <Box
+          className="scrollList"
+          sx={{
+            height: "520px",
+            overflowY: "scroll",
+            marginTop: "1.5rem"
+          }}
+        >
+          {loadingCustomers ? (
+            <h4>Loading...</h4>
+          ) : (
+            <CustomersList
+              customersData={customers.data}
+              refetchCustomers={refetchCustomers}
+            />
+          )}
+        </Box>
       </Box>
     </Box>
   );

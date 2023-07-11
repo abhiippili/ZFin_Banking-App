@@ -5,11 +5,13 @@ import { useQuery } from "react-query";
 import { getCustomer } from "./../../api/customersApi";
 
 const TopButton = styled(Button)({
-  color: "#fff",
+  color: "#000",
+  fontWeight: 600,
   margin: "20px 20px",
-  // backgroundColor: "#0093E9",
-  // backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
-  backgroundImage: "linear-gradient( 135deg, #3B2667 10%, #BC78EC 100%)"
+  backgroundColor: "rgb(97, 218, 251)",
+  "&:hover": {
+    backgroundColor: "rgb(97, 218, 251)"
+  }
 });
 
 const modalStyle = {
@@ -18,8 +20,7 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  backgroundColor: "#21D4FD",
-  backgroundImage: "linear-gradient(12deg, #21D4FD 0%, #B721FF 100%)",
+  backgroundColor: "#fff",
   borderRadius: "10px",
   boxShadow: 24,
   p: 4
