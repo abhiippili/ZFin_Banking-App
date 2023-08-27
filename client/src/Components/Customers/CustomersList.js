@@ -77,7 +77,6 @@ const CustomersList = ({ customersData, refetchCustomers }) => {
     onSuccess() {
       setMessage("✅ Transaction Successfull");
       refetchCustomer();
-      refetchCustomers();
     },
     onError(err) {
       setMessage("❌ Error transacting your money");
